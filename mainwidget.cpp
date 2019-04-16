@@ -61,8 +61,10 @@ void MainWidget::setButton(int w, int h, int x, int y, QWidget *parent, QString 
 }
 void MainWidget::inputNumber(char ch)
 {
-    if (operaNum == 5)
-        display.clear();
+    if (operaNum == 5){
+        clearNum();
+        operaNum=0;
+    }
     if (ch == '.' && isdot == false)
     {
         if (display.text().length() <= 0)
@@ -112,10 +114,12 @@ void MainWidget::addoperator(int oper)
     {
         isNum = true;
         operaNum = oper;
-        A = display.text();
+        if(display.text().isEmpty())
+            A="0";
+        else
+            A = display.text();
         display.clear();
     }
-    isdot = false;
 }
 
 void MainWidget::plusNum()
